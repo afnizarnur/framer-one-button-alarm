@@ -17,19 +17,23 @@ setTime = () ->
 		
 setTime()
 
-# Button Behaviour
-purpleForce = new Gradient
-	start: "#3B1FA5"
-	end: "#331367"
-	
+# Button Behaviour and States
 purple = new Gradient
 	start: "#532ED6"
 	end: "#B28AF2"
 
+purpleForce = new Gradient
+	start: "#3B1FA5"
+	end: "#331367"
+
 addButton = button.children[0] 
 checkButton = button.children[1] 
+checkButton.scale = 0
+add_alarm.scale = 0	
+add_alarm.y = 500	
+
 button.states =
-	static:
+	normal:
 		gradient: purple
 		animationOptions:
 			time: 1
@@ -53,8 +57,7 @@ addButton.states =
 		animationOptions:
 			time: 0.4
 			curve: Spring
-	
-checkButton.scale = 0
+
 checkButton.states =
 	active:
 		opacity: 1
@@ -68,14 +71,12 @@ checkButton.states =
 		animationOptions:
 			time: 0.4
 			curve: Spring
-
-add_alarm.scale = 0	
-add_alarm.y = 500	
+			
 add_alarm.states =
 	active:
 		opacity: 1
 		scale: 1
-		y: 267
+		y: 300
 		animationOptions:
 			time: .7
 			curve: Spring
@@ -88,22 +89,24 @@ add_alarm.states =
 			curve: Spring
 
 button.onTap (event, layer) ->
-	ignoreEvents = false
-	button.animate("tapped")
-	addButton.animate("hidden")
-	checkButton.animate("active")
-	add_alarm.animate("active")
-	
-# if button.states.current.name = "tapped"
-# 	button.onTap (event, layer) ->
-# 		ignoreEvents = false
-# 		button.animate("static")
-# 		addButton.animate("active")
-# 		checkButton.animate("hidden")
-# 		add_alarm.animate("hidden")
+	if this.states.current.name is "tapped"
+		add_alarm.height = 210
+		button.animate("normal")
+		addButton.animate("active")
+		checkButton.animate("hidden")
+		add_alarm.animate("hidden")
+	else 
+		add_alarm.height = 210
+		button.animate("tapped")
+		addButton.animate("hidden")
+		checkButton.animate("active")
+		add_alarm.animate("active")
+
+maximize.onTap (event, layer) ->
+	if add_alarm.height <= 260
+		add_alarm.height = 470
+		add_alarm.y = 40
+	else
+		add_alarm.height = 260
+		add_alarm.y = 250
 		
-
-# button.onForceTapEnd ->
-# 	button.animate("default")
-# 	
-
