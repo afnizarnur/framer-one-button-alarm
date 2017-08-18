@@ -128,4 +128,23 @@ maximize.onTap (event, layer) ->
 		add_alarm.animate("full")
 	else
 		add_alarm.animate("small")
-		
+	
+
+scrollExisting = new ScrollComponent
+scrollExisting.z = -1
+scrollExisting.parent = add_alarm
+scrollExisting.backgroundColor = "transparent"
+scrollExisting.y = 0
+scrollExisting.width = add_alarm.width
+scrollExisting.height = 470
+scrollExisting.scrollHorizontal = false
+wrapper_content.parent = scrollExisting.content
+wrapper_empty.parent = wrapper_content
+wrapper_empty.x = Screen.width
+	
+existing.onTap (event, layer) ->
+	wrapper_content.height = 470
+	add_alarm.animate("full")
+	wrapper_empty.x = Align.center
+	scrollExisting.height = 470
+	scrollExisting.z = 0
