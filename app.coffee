@@ -86,6 +86,25 @@ add_alarm.states =
 		y: 500
 		animationOptions:
 			time: .7
+			curve: Spring	
+	full:
+		height: 470
+		y: 40
+		animationOptions:
+			time: .7
+			curve: Spring
+	small:
+		height: 260
+		y: 250
+		animationOptions:
+			time: .7
+			curve: Spring
+	hiddenFull:
+		opacity: 0
+		scale: 0
+		y: 500
+		animationOptions:
+			time: 1.4
 			curve: Spring
 
 button.onTap (event, layer) ->
@@ -94,9 +113,11 @@ button.onTap (event, layer) ->
 		button.animate("normal")
 		addButton.animate("active")
 		checkButton.animate("hidden")
-		add_alarm.animate("hidden")
+		if add_alarm.states.current.name is "full"
+			add_alarm.animate("hiddenFull")
+		else
+			add_alarm.animate("hidden")
 	else 
-		add_alarm.height = 210
 		button.animate("tapped")
 		addButton.animate("hidden")
 		checkButton.animate("active")
@@ -104,9 +125,7 @@ button.onTap (event, layer) ->
 
 maximize.onTap (event, layer) ->
 	if add_alarm.height <= 260
-		add_alarm.height = 470
-		add_alarm.y = 40
+		add_alarm.animate("full")
 	else
-		add_alarm.height = 260
-		add_alarm.y = 250
+		add_alarm.animate("small")
 		
