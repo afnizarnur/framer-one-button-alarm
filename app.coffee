@@ -228,6 +228,5 @@ existing.onTap (event, layer) ->
 		checkButton.animate("active")
 		closeButton.animate("hidden")
 		wrapper_empty.animate("hidden")
-		add_alarm.animate("small")
 
 
