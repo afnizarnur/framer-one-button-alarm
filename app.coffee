@@ -17,6 +17,11 @@ setTime = () ->
 		
 setTime()
 
+# Function
+# Check if array null 
+Array::present = ->
+	@.length > 0
+
 # Button Behaviour and States
 purple = new Gradient
 	start: "#532ED6"
@@ -28,6 +33,7 @@ purpleForce = new Gradient
 
 addButton = button.children[0] 
 checkButton = button.children[1] 
+closeButton = button.children[2] 
 checkButton.scale = 0
 add_alarm.scale = 0	
 add_alarm.y = 500	
@@ -59,6 +65,20 @@ addButton.states =
 			curve: Spring
 
 checkButton.states =
+	active:
+		opacity: 1
+		scale: 1
+		animationOptions:
+			time: 0.4
+			curve: Spring
+	hidden: 
+		opacity: 0
+		scale: 0
+		animationOptions:
+			time: 0.4
+			curve: Spring
+
+closeButton.states =
 	active:
 		opacity: 1
 		scale: 1
@@ -107,6 +127,7 @@ add_alarm.states =
 			time: 1.4
 			curve: Spring
 
+# When Button onTap
 button.onTap (event, layer) ->
 	if this.states.current.name is "tapped"
 		add_alarm.height = 210
@@ -126,17 +147,14 @@ button.onTap (event, layer) ->
 
 timer = []
 
-# Check if array null 
-Array::present = ->
-	@.length > 0
-
-
 maximize.onTap (event, layer) ->
-	if add_alarm.height <= 260 && timer.present() is not true 
+	if add_alarm.height <= 260
+		add_alarm.animate("full")
+	else if wrapper_empty.states.current.name is "active"
 		add_alarm.animate("full")
 	else
 		add_alarm.animate("small")
-
+		
 scrollExisting = new ScrollComponent
 	z: -1
 	y: 50
@@ -164,7 +182,7 @@ wrapper_empty.stateSwitch("hidden")
 
 existing.onTap (event, layer) ->
 	add_alarm.animate("full")
-	if !timer
+	if timer.present()
 		print "Empty timer"	
 	else
 		if wrapper_empty.states.current.name isnt "active"
@@ -174,3 +192,5 @@ existing.onTap (event, layer) ->
 			
 			Utils.delay 0.3, ->
 				wrapper_empty.animate("active")
+
+

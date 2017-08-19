@@ -1189,6 +1189,52 @@
                     "opacity" : 0,
                     "centerAnchorY" : 0.5069444444444444,
                     "visible" : true
+                  },
+                  {
+                    "__class" : "SVGNode",
+                    "fillType" : "color",
+                    "originalFilename" : "x",
+                    "centerAnchorX" : 0.5069444444444444,
+                    "parentid" : "@%%j9@Po",
+                    "rotation" : 0,
+                    "locked" : false,
+                    "intrinsicWidth" : 24,
+                    "top" : null,
+                    "right" : null,
+                    "intrinsicHeight" : 24,
+                    "name" : null,
+                    "shadows" : [
+                      {
+                        "y" : 2,
+                        "enabled" : false,
+                        "blur" : 5,
+                        "x" : 0,
+                        "__class" : "Shadow",
+                        "color" : "rgba(0,0,0,0.25)"
+                      }
+                    ],
+                    "aspectRatioLocked" : true,
+                    "id" : "zGR?%NUq",
+                    "svg" : "<?xml version=\"1.0\"?><svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-x\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"><\/line><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"><\/line><\/svg>",
+                    "constraintsLocked" : false,
+                    "left" : null,
+                    "bottom" : null,
+                    "height" : 35,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "width" : 35,
+                    "widthFactor" : null,
+                    "targetName" : null,
+                    "heightFactor" : null,
+                    "fillColor" : "rgb(255, 255, 255)",
+                    "opacity" : 0,
+                    "centerAnchorY" : 0.5069444444444444,
+                    "visible" : true
                   }
                 ],
                 "name" : "button",
