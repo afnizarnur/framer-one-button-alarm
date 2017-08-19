@@ -202,7 +202,6 @@ existing.states =
 			time: .3
 			curve: Bezier.easeIn
 
-
 existing.onTap (event, layer) ->
 	if existing.states.current.name isnt "active"
 		add_alarm.animate("full")
