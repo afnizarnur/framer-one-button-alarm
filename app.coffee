@@ -113,6 +113,7 @@ button.onTap (event, layer) ->
 		button.animate("normal")
 		addButton.animate("active")
 		checkButton.animate("hidden")
+		wrapper_empty.stateSwitch("hidden")
 		if add_alarm.states.current.name is "full"
 			add_alarm.animate("hiddenFull")
 		else
@@ -123,28 +124,53 @@ button.onTap (event, layer) ->
 		checkButton.animate("active")
 		add_alarm.animate("active")
 
+timer = []
+
+# Check if array null 
+Array::present = ->
+	@.length > 0
+
 maximize.onTap (event, layer) ->
 	if add_alarm.height <= 260
 		add_alarm.animate("full")
+	else if timer.present() is not true
+		add_alarm.stateSwitch("full")
 	else
 		add_alarm.animate("small")
-	
 
 scrollExisting = new ScrollComponent
-scrollExisting.z = -1
-scrollExisting.parent = add_alarm
-scrollExisting.backgroundColor = "transparent"
-scrollExisting.y = 0
-scrollExisting.width = add_alarm.width
-scrollExisting.height = 470
-scrollExisting.scrollHorizontal = false
+	z: -1
+	y: 50
+	parent: add_alarm
+	width: add_alarm.width
+	height: 420
+	scrollHorizontal: false
+
 wrapper_content.parent = scrollExisting.content
 wrapper_empty.parent = wrapper_content
-wrapper_empty.x = Screen.width
-	
+
+wrapper_empty.states =
+	active: 
+		opacity: 1
+		scale: 1
+		x: Align.center
+		animationOptions:
+			time: .4
+			curve: Spring
+	hidden:
+		opacity: 0
+		scale: 0
+
 existing.onTap (event, layer) ->
-	wrapper_content.height = 470
 	add_alarm.animate("full")
-	wrapper_empty.x = Align.center
-	scrollExisting.height = 470
-	scrollExisting.z = 0
+	wrapper_empty.stateSwitch("hidden")
+	
+	if !timer
+		print "Empty timer"	
+	else
+		wrapper_content.height = 470 - 50
+		scrollExisting.z = 0
+		scrollExisting.scrollVertical = false
+		
+		Utils.delay 0.3, ->
+			wrapper_empty.animate("active")
