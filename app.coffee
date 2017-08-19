@@ -130,11 +130,10 @@ timer = []
 Array::present = ->
 	@.length > 0
 
+
 maximize.onTap (event, layer) ->
-	if add_alarm.height <= 260
+	if add_alarm.height <= 260 && timer.present() is not true 
 		add_alarm.animate("full")
-	else if timer.present() is not true
-		add_alarm.stateSwitch("full")
 	else
 		add_alarm.animate("small")
 
@@ -161,16 +160,17 @@ wrapper_empty.states =
 		opacity: 0
 		scale: 0
 
+wrapper_empty.stateSwitch("hidden")
+
 existing.onTap (event, layer) ->
 	add_alarm.animate("full")
-	wrapper_empty.stateSwitch("hidden")
-	
 	if !timer
 		print "Empty timer"	
 	else
-		wrapper_content.height = 470 - 50
-		scrollExisting.z = 0
-		scrollExisting.scrollVertical = false
-		
-		Utils.delay 0.3, ->
-			wrapper_empty.animate("active")
+		if wrapper_empty.states.current.name isnt "active"
+			wrapper_content.height = 470 - 50
+			scrollExisting.z = 0
+			scrollExisting.scrollVertical = false
+			
+			Utils.delay 0.3, ->
+				wrapper_empty.animate("active")
