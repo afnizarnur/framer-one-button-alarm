@@ -134,18 +134,30 @@ button.onTap (event, layer) ->
 		button.animate("normal")
 		addButton.animate("active")
 		checkButton.animate("hidden")
+		closeButton.animate("hidden")
+		maximize.stateSwitch("default")
+		existing.stateSwitch("default")
 		wrapper_empty.stateSwitch("hidden")
 		if add_alarm.states.current.name is "full"
 			add_alarm.animate("hiddenFull")
 		else
 			add_alarm.animate("hidden")
+		
 	else 
 		button.animate("tapped")
 		addButton.animate("hidden")
 		checkButton.animate("active")
+		closeButton.animate("hidden")
 		add_alarm.animate("active")
 
 timer = []
+
+maximize.states =
+	disable:
+		opacity: .3
+		animationOptions:
+			time: .5
+			curve: Bezier.ease
 
 maximize.onTap (event, layer) ->
 	if add_alarm.height <= 260
@@ -177,20 +189,46 @@ wrapper_empty.states =
 	hidden:
 		opacity: 0
 		scale: 0
+		animationOptions:
+			time: .4
+			curve: Spring
 
 wrapper_empty.stateSwitch("hidden")
 
+existing.states =
+	active:
+		borderColor: "#7755CC"
+		animationOptions:
+			time: .3
+			curve: Bezier.easeIn
+
+
 existing.onTap (event, layer) ->
-	add_alarm.animate("full")
-	if timer.present()
-		print "Empty timer"	
-	else
-		if wrapper_empty.states.current.name isnt "active"
-			wrapper_content.height = 470 - 50
-			scrollExisting.z = 0
-			scrollExisting.scrollVertical = false
-			
-			Utils.delay 0.3, ->
-				wrapper_empty.animate("active")
+	if existing.states.current.name isnt "active"
+		add_alarm.animate("full")
+		if timer.present()
+			existing.animate("active")
+			print "Not empty timer"	
+		else
+			existing.animate("active")
+			if wrapper_empty.states.current.name isnt "active"
+				maximize.animate("disable")
+				wrapper_content.height = 470 - 50
+				scrollExisting.z = 0
+				scrollExisting.scrollVertical = false
+				addButton.animate("hidden")
+				checkButton.animate("hidden")
+				closeButton.animate("active")
+				
+				Utils.delay 0.3, ->
+					wrapper_empty.animate("active")
+	else 
+		existing.stateSwitch("default")
+		maximize.stateSwitch("default")
+		addButton.animate("hidden")
+		checkButton.animate("active")
+		closeButton.animate("hidden")
+		wrapper_empty.animate("hidden")
+		add_alarm.animate("small")
 
 
