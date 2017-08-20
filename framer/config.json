@@ -16,9 +16,9 @@
   "selectedHand" : "iphone-hands-1",
   "showBezel" : false,
   "foldedCodeRanges" : [
-    "{0, 271}",
-    "{272, 68}",
-    "{341, 1514}"
+    "{31, 271}",
+    "{303, 68}",
+    "{372, 1514}"
   ],
   "deviceScale" : "fit"
 }

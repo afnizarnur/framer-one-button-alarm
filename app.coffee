@@ -1,3 +1,5 @@
+InputModule = require "input"
+
 # Statusbar time
 setTime = () ->
 	date = new Date
@@ -114,8 +116,8 @@ add_alarm.states =
 			time: .7
 			curve: Spring
 	small:
-		height: 260
-		y: 250
+		height: 210
+		y: 300
 		animationOptions:
 			time: .7
 			curve: Spring
@@ -127,46 +129,6 @@ add_alarm.states =
 			time: 1.4
 			curve: Spring
 
-# When Button onTap
-button.onTap (event, layer) ->
-	if this.states.current.name is "tapped"
-		add_alarm.height = 210
-		button.animate("normal")
-		addButton.animate("active")
-		checkButton.animate("hidden")
-		closeButton.animate("hidden")
-		maximize.stateSwitch("default")
-		existing.stateSwitch("default")
-		wrapper_empty.stateSwitch("hidden")
-		if add_alarm.states.current.name is "full"
-			add_alarm.animate("hiddenFull")
-		else
-			add_alarm.animate("hidden")
-		
-	else 
-		button.animate("tapped")
-		addButton.animate("hidden")
-		checkButton.animate("active")
-		closeButton.animate("hidden")
-		add_alarm.animate("active")
-
-timer = []
-
-maximize.states =
-	disable:
-		opacity: .3
-		animationOptions:
-			time: .5
-			curve: Bezier.ease
-
-maximize.onTap (event, layer) ->
-	if add_alarm.height <= 260
-		add_alarm.animate("full")
-	else if wrapper_empty.states.current.name is "active"
-		add_alarm.animate("full")
-	else
-		add_alarm.animate("small")
-		
 scrollExisting = new ScrollComponent
 	z: -1
 	y: 50
@@ -175,8 +137,81 @@ scrollExisting = new ScrollComponent
 	height: 420
 	scrollHorizontal: false
 
+scrollExisting.states = 
+	small: 
+		height: 161
+	full: 
+		height: 470
+
 wrapper_content.parent = scrollExisting.content
-wrapper_empty.parent = wrapper_content
+
+wrapper_add.states = 
+	active:
+		x: 0
+		animationOptions:
+			time: .5
+			curve: Bezier.ease
+	hidden:
+		x: 350
+		animationOptions:
+			time: .2
+			curve: Bezier.easeIn
+		
+# When Button onTap
+button.onTap (event, layer) ->
+	if this.states.current.name is "tapped"
+		add_alarm.height = 210
+		button.animate("normal")
+		addButton.animate("active")
+		checkButton.animate("hidden")
+		closeButton.animate("hidden")
+		maximize.animate("default")
+		existing.stateSwitch("default")
+		wrapper_empty.stateSwitch("hidden")
+
+		if add_alarm.states.current.name is "full"
+			add_alarm.animate("hiddenFull")
+		else
+			add_alarm.animate("hidden")
+	else 
+		button.animate("tapped")
+		addButton.animate("hidden")
+		checkButton.animate("active")
+		closeButton.animate("hidden")
+		add_alarm.animate("active")
+		
+		scrollExisting.scrollVertical = true
+		scrollExisting.z = 0
+		scrollExisting.height = 159
+		scrollExisting.contentInset =
+			bottom: 50
+		wrapper_add.parent = scrollExisting.content
+		wrapper_content.y = 0
+
+timer = []
+
+maximize.states =
+	disable:
+		opacity: .3
+		animationOptions:
+			time: .2
+			curve: Bezier.easeInOut
+	default:
+		opacity: 1
+		animationOptions:
+			time: .2
+			curve: Bezier.easeInOut
+
+maximize.onTap (event, layer) ->
+	if add_alarm.height <= 210
+		add_alarm.animate("full")
+		scrollExisting.stateSwitch("full")
+	else if wrapper_empty.states.current.name is "active"
+		add_alarm.animate("full")
+		scrollExisting.stateSwitch("full")
+	else
+		add_alarm.animate("small")
+		scrollExisting.stateSwitch("small")
 
 wrapper_empty.states =
 	active: 
@@ -195,20 +230,31 @@ wrapper_empty.states =
 
 wrapper_empty.stateSwitch("hidden")
 
+wrapper_content.parent = scrollExisting.content
+
 existing.states =
 	active:
 		borderColor: "#7755CC"
 		animationOptions:
 			time: .3
-			curve: Bezier.easeIn
+			curve: Bezier.easeInOut
+	default:
+		borderColor: "#DDDDDD"
+		animationOptions:
+			time: .3
+			curve: Bezier.easeInOut
 
 existing.onTap (event, layer) ->
 	if existing.states.current.name isnt "active"
+		scrollExisting.stateSwitch("full")
 		add_alarm.animate("full")
+		Utils.delay .2, ->
+			wrapper_add.animate("hidden")
 		if timer.present()
 			existing.animate("active")
 			print "Not empty timer"	
 		else
+			wrapper_empty.parent = wrapper_content
 			existing.animate("active")
 			if wrapper_empty.states.current.name isnt "active"
 				maximize.animate("disable")
@@ -222,11 +268,14 @@ existing.onTap (event, layer) ->
 				Utils.delay 0.3, ->
 					wrapper_empty.animate("active")
 	else 
-		existing.stateSwitch("default")
-		maximize.stateSwitch("default")
+		existing.animate("default")
+		maximize.animate("default")
 		addButton.animate("hidden")
 		checkButton.animate("active")
 		closeButton.animate("hidden")
 		wrapper_empty.animate("hidden")
+		scrollExisting.scrollVertical = true
+		Utils.delay .2, ->
+			wrapper_add.animate("active")
 
 
