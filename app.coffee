@@ -126,7 +126,7 @@ add_alarm.states =
 		scale: 0
 		y: 380
 		animationOptions:
-			time: .3
+			time: .2
 			curve: Bezier.easeIn
 
 scrollExisting = new ScrollComponent
@@ -257,10 +257,10 @@ existing.states =
 
 existing.onTap (event, layer) ->
 	if existing.states.current.name isnt "active"
-		scrollExisting.stateSwitch("full")
-		add_alarm.animate("full")
+		wrapper_add.animate("hidden")
 		Utils.delay .2, ->
-			wrapper_add.animate("hidden")
+			scrollExisting.stateSwitch("full")
+			add_alarm.animate("full")
 		if timer.present()
 			existing.animate("active")
 			print "Not empty timer"	
@@ -269,7 +269,7 @@ existing.onTap (event, layer) ->
 			existing.animate("active")
 			if wrapper_empty.states.current.name isnt "active"
 				maximize.animate("disable")
-				wrapper_content.height = 470 - 50
+				wrapper_content.height = 420
 				scrollExisting.z = 0
 				scrollExisting.scrollVertical = false
 				addButton.animate("hidden")

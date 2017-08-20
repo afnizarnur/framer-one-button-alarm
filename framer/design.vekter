@@ -2201,11 +2201,6 @@
                               "inlineStyleRanges" : [
                                 {
                                   "length" : 1,
-                                  "style" : "FONT:.SFNSText|SFUIText-Regular|.SFUIText",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 1,
                                   "style" : "COLOR:#000000",
                                   "offset" : 0
                                 },
@@ -2223,6 +2218,16 @@
                                   "length" : 1,
                                   "style" : "SIZE:24",
                                   "offset" : 0
+                                },
+                                {
+                                  "length" : 1,
+                                  "style" : "ALIGN:center",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 1,
+                                  "style" : "FONT:.SFNSText-Light|SFUIText-Light|.SFUIText-Light",
+                                  "offset" : 0
                                 }
                               ],
                               "entityRanges" : [
@@ -2230,11 +2235,12 @@
                               ],
                               "data" : {
                                 "emptyStyle" : [
-                                  "FONT:.SFNSText|SFUIText-Regular|.SFUIText",
                                   "COLOR:#000000",
                                   "LETTERSPACING:0",
                                   "LINEHEIGHT:1.2",
-                                  "SIZE:24"
+                                  "SIZE:24",
+                                  "ALIGN:center",
+                                  "FONT:.SFNSText-Light|SFUIText-Light|.SFUIText-Light"
                                 ]
                               },
                               "text" : "2",
@@ -2351,11 +2357,6 @@
                               "inlineStyleRanges" : [
                                 {
                                   "length" : 2,
-                                  "style" : "FONT:.SFNSText|SFUIText-Regular|.SFUIText",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 2,
                                   "style" : "COLOR:#000000",
                                   "offset" : 0
                                 },
@@ -2373,6 +2374,16 @@
                                   "length" : 2,
                                   "style" : "SIZE:24",
                                   "offset" : 0
+                                },
+                                {
+                                  "length" : 2,
+                                  "style" : "ALIGN:center",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 2,
+                                  "style" : "FONT:.SFNSText-Light|SFUIText-Light|.SFUIText-Light",
+                                  "offset" : 0
                                 }
                               ],
                               "entityRanges" : [
@@ -2380,11 +2391,12 @@
                               ],
                               "data" : {
                                 "emptyStyle" : [
-                                  "FONT:.SFNSText|SFUIText-Regular|.SFUIText",
                                   "COLOR:#000000",
                                   "LETTERSPACING:0",
                                   "LINEHEIGHT:1.2",
-                                  "SIZE:24"
+                                  "SIZE:24",
+                                  "ALIGN:center",
+                                  "FONT:.SFNSText-Light|SFUIText-Light|.SFUIText-Light"
                                 ]
                               },
                               "text" : "55",
@@ -2501,11 +2513,6 @@
                               "inlineStyleRanges" : [
                                 {
                                   "length" : 2,
-                                  "style" : "FONT:.SFNSText|SFUIText-Regular|.SFUIText",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 2,
                                   "style" : "COLOR:#000000",
                                   "offset" : 0
                                 },
@@ -2523,6 +2530,16 @@
                                   "length" : 2,
                                   "style" : "SIZE:20",
                                   "offset" : 0
+                                },
+                                {
+                                  "length" : 2,
+                                  "style" : "ALIGN:center",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 2,
+                                  "style" : "FONT:.SFNSText-Light|SFUIText-Light|.SFUIText-Light",
+                                  "offset" : 0
                                 }
                               ],
                               "entityRanges" : [
@@ -2530,11 +2547,12 @@
                               ],
                               "data" : {
                                 "emptyStyle" : [
-                                  "FONT:.SFNSText|SFUIText-Regular|.SFUIText",
                                   "COLOR:#000000",
                                   "LETTERSPACING:0",
                                   "LINEHEIGHT:1.2",
-                                  "SIZE:20"
+                                  "SIZE:20",
+                                  "ALIGN:center",
+                                  "FONT:.SFNSText-Light|SFUIText-Light|.SFUIText-Light"
                                 ]
                               },
                               "text" : "AM",
