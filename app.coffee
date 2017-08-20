@@ -107,8 +107,8 @@ add_alarm.states =
 		scale: 0
 		y: 500
 		animationOptions:
-			time: .7
-			curve: Spring	
+			time: .2
+			curve: Bezier.easeIn	
 	full:
 		height: 470
 		y: 40
@@ -124,10 +124,10 @@ add_alarm.states =
 	hiddenFull:
 		opacity: 0
 		scale: 0
-		y: 500
+		y: 380
 		animationOptions:
-			time: 1.4
-			curve: Spring
+			time: .3
+			curve: Bezier.easeIn
 
 scrollExisting = new ScrollComponent
 	z: -1
@@ -136,12 +136,24 @@ scrollExisting = new ScrollComponent
 	width: add_alarm.width
 	height: 420
 	scrollHorizontal: false
+	backgroundColor: "transparent"
 
 scrollExisting.states = 
 	small: 
+		contentInset:
+			bottom: 20
 		height: 161
+		animationOptions:
+			time: .1
+			curve: Bezier.easeInOut
 	full: 
+		contentInset:
+			bottom: 20
 		height: 470
+		animationOptions:
+			time: .3	
+			curve: Bezier.easeInOut
+			
 
 wrapper_content.parent = scrollExisting.content
 
@@ -159,8 +171,13 @@ wrapper_add.states =
 		
 # When Button onTap
 button.onTap (event, layer) ->
+	scrollExisting.scrollVertical = true
+	scrollExisting.z = 0
+	scrollExisting.stateSwitch("small")
+	wrapper_add.parent = scrollExisting.content
+	wrapper_content.y = 0
+	add_alarm.height = 210
 	if this.states.current.name is "tapped"
-		add_alarm.height = 210
 		button.animate("normal")
 		addButton.animate("active")
 		checkButton.animate("hidden")
@@ -170,6 +187,7 @@ button.onTap (event, layer) ->
 		wrapper_empty.stateSwitch("hidden")
 
 		if add_alarm.states.current.name is "full"
+			add_alarm.height = 470
 			add_alarm.animate("hiddenFull")
 		else
 			add_alarm.animate("hidden")
@@ -179,14 +197,7 @@ button.onTap (event, layer) ->
 		checkButton.animate("active")
 		closeButton.animate("hidden")
 		add_alarm.animate("active")
-		
-		scrollExisting.scrollVertical = true
-		scrollExisting.z = 0
-		scrollExisting.height = 159
-		scrollExisting.contentInset =
-			bottom: 50
-		wrapper_add.parent = scrollExisting.content
-		wrapper_content.y = 0
+		wrapper_add.stateSwitch("active")	
 
 timer = []
 
@@ -205,13 +216,13 @@ maximize.states =
 maximize.onTap (event, layer) ->
 	if add_alarm.height <= 210
 		add_alarm.animate("full")
-		scrollExisting.stateSwitch("full")
+		scrollExisting.animate("full")
 	else if wrapper_empty.states.current.name is "active"
 		add_alarm.animate("full")
-		scrollExisting.stateSwitch("full")
+		scrollExisting.animate("full")
 	else
 		add_alarm.animate("small")
-		scrollExisting.stateSwitch("small")
+		scrollExisting.animate("small")
 
 wrapper_empty.states =
 	active: 
