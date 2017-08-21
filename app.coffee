@@ -171,7 +171,7 @@ inputM.style =
 	textAlign: "center"
 
 # Insert to JSON Array
-if checkButton.states.current.name is "default" && inputH.value != null && inputM.value != null
+if inputH.value != null && inputM.value != null && checkButton.states.current.name is "default"
 	checkButton.onTap (event, layer) ->
 		timer_count++
 		data = 
@@ -180,7 +180,6 @@ if checkButton.states.current.name is "default" && inputH.value != null && input
 			minutes: inputM.value
 			
 		timer.push data
-		print timer
 
 # ScrollComponent for Window Alarm
 scrollExisting = new ScrollComponent
