@@ -178,7 +178,6 @@ if inputH.value != null && inputM.value != null && checkButton.states.current.na
 			id: timer_count
 			hours: inputH.value
 			minutes: inputM.value
-			
 		timer.push data
 
 # ScrollComponent for Window Alarm
@@ -344,4 +343,6 @@ existing.onTap (event, layer) ->
 		scrollExisting.scrollVertical = true
 		Utils.delay .2, ->
 			wrapper_add.animate("active")
+
+
 
