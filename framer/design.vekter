@@ -2713,7 +2713,7 @@
                             },
                             {
                               "length" : 6,
-                              "style" : "SIZE:14",
+                              "style" : "SIZE:13",
                               "offset" : 0
                             }
                           ],
@@ -2726,7 +2726,7 @@
                               "COLOR:#000000",
                               "LETTERSPACING:0",
                               "LINEHEIGHT:1.2",
-                              "SIZE:14"
+                              "SIZE:13"
                             ]
                           },
                           "text" : "Snooze",
@@ -2755,9 +2755,9 @@
                     "constraintsLocked" : false,
                     "left" : 19,
                     "bottom" : null,
-                    "height" : 16,
+                    "height" : 15,
                     "opacity" : 1,
-                    "width" : 50,
+                    "width" : 47,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
@@ -3004,7 +3004,7 @@
                             },
                             {
                               "length" : 5,
-                              "style" : "SIZE:14",
+                              "style" : "SIZE:13",
                               "offset" : 0
                             }
                           ],
@@ -3017,7 +3017,7 @@
                               "COLOR:#000000",
                               "LETTERSPACING:0",
                               "LINEHEIGHT:1.2",
-                              "SIZE:14"
+                              "SIZE:13"
                             ]
                           },
                           "text" : "Sound",
@@ -3046,9 +3046,9 @@
                     "constraintsLocked" : false,
                     "left" : 19,
                     "bottom" : null,
-                    "height" : 16,
+                    "height" : 15,
                     "opacity" : 1,
-                    "width" : 44,
+                    "width" : 41,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
@@ -3295,7 +3295,7 @@
                             },
                             {
                               "length" : 5,
-                              "style" : "SIZE:14",
+                              "style" : "SIZE:13",
                               "offset" : 0
                             }
                           ],
@@ -3308,7 +3308,7 @@
                               "COLOR:#000000",
                               "LETTERSPACING:0",
                               "LINEHEIGHT:1.2",
-                              "SIZE:14"
+                              "SIZE:13"
                             ]
                           },
                           "text" : "Label",
@@ -3337,9 +3337,9 @@
                     "constraintsLocked" : false,
                     "left" : 19,
                     "bottom" : null,
-                    "height" : 16,
+                    "height" : 15,
                     "opacity" : 1,
-                    "width" : 37,
+                    "width" : 35,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
@@ -3586,7 +3586,7 @@
                             },
                             {
                               "length" : 6,
-                              "style" : "SIZE:14",
+                              "style" : "SIZE:13",
                               "offset" : 0
                             }
                           ],
@@ -3599,7 +3599,7 @@
                               "COLOR:#000000",
                               "LETTERSPACING:0",
                               "LINEHEIGHT:1.2",
-                              "SIZE:14"
+                              "SIZE:13"
                             ]
                           },
                           "text" : "Repeat",
@@ -3628,9 +3628,9 @@
                     "constraintsLocked" : false,
                     "left" : 19,
                     "bottom" : null,
-                    "height" : 16,
+                    "height" : 15,
                     "opacity" : 1,
-                    "width" : 48,
+                    "width" : 44,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
