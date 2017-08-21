@@ -1,4 +1,14 @@
+# Show Hints
+Framer.Extras.Hints.disable()
+
 InputModule = require "input"
+timer = []
+timer_count = 0
+
+# Disable right-click context menu
+if document.addEventListener?
+	document.addEventListener "contextmenu", (event) ->
+		event.preventDefault()
 
 # Statusbar time
 setTime = () ->
@@ -24,7 +34,7 @@ setTime()
 Array::present = ->
 	@.length > 0
 
-# Button Behaviour and States
+# Button & Alarm Behaviour and States
 purple = new Gradient
 	start: "#532ED6"
 	end: "#B28AF2"
@@ -119,8 +129,8 @@ add_alarm.states =
 		height: 210
 		y: 300
 		animationOptions:
-			time: .7
-			curve: Spring
+			time: .2
+			curve: Bezier.easeInOut
 	hiddenFull:
 		opacity: 0
 		scale: 0
@@ -129,6 +139,50 @@ add_alarm.states =
 			time: .2
 			curve: Bezier.easeIn
 
+# When adding alarm
+inputH = new InputModule.Input
+	parent: base_timer
+	width: 38
+	height: 38
+	placeholder: "3"
+	x: 60
+	y: 26
+	fontWeight: "300"
+	fontSize: 24
+	textAlign: "center"
+	virtualKeyboard: false
+
+inputM = new InputModule.Input
+	parent: base_timer
+	width: 38
+	height: 38
+	placeholder: "55"
+	x: 135
+	y: 26
+	fontWeight: "300"
+	fontSize: 24
+	textAlign: "center"
+	virtualKeyboard: false
+  
+inputH.style =
+	textAlign: "center"
+  
+inputM.style =
+	textAlign: "center"
+
+# Insert to JSON Array
+if checkButton.states.current.name is "default" && inputH.value != null && inputM.value != null
+	checkButton.onTap (event, layer) ->
+		timer_count++
+		data = 
+			id: timer_count
+			hours: inputH.value
+			minutes: inputM.value
+			
+		timer.push data
+		print timer
+
+# ScrollComponent for Window Alarm
 scrollExisting = new ScrollComponent
 	z: -1
 	y: 50
@@ -154,9 +208,9 @@ scrollExisting.states =
 			time: .3	
 			curve: Bezier.easeInOut
 			
-
 wrapper_content.parent = scrollExisting.content
-
+		
+# States for Add Alarm container
 wrapper_add.states = 
 	active:
 		x: 0
@@ -169,6 +223,7 @@ wrapper_add.states =
 			time: .2
 			curve: Bezier.easeIn
 		
+
 # When Button onTap
 button.onTap (event, layer) ->
 	scrollExisting.scrollVertical = true
@@ -199,8 +254,7 @@ button.onTap (event, layer) ->
 		add_alarm.animate("active")
 		wrapper_add.stateSwitch("active")	
 
-timer = []
-
+# Maximize states
 maximize.states =
 	disable:
 		opacity: .3
@@ -213,6 +267,7 @@ maximize.states =
 			time: .2
 			curve: Bezier.easeInOut
 
+# When maximize onTap
 maximize.onTap (event, layer) ->
 	if add_alarm.height <= 210
 		add_alarm.animate("full")
@@ -224,6 +279,7 @@ maximize.onTap (event, layer) ->
 		add_alarm.animate("small")
 		scrollExisting.animate("small")
 
+# When timer empty
 wrapper_empty.states =
 	active: 
 		opacity: 1
@@ -243,6 +299,7 @@ wrapper_empty.stateSwitch("hidden")
 
 wrapper_content.parent = scrollExisting.content
 
+# When user tap existing page
 existing.states =
 	active:
 		borderColor: "#7755CC"
@@ -254,7 +311,7 @@ existing.states =
 		animationOptions:
 			time: .3
 			curve: Bezier.easeInOut
-
+			
 existing.onTap (event, layer) ->
 	if existing.states.current.name isnt "active"
 		wrapper_add.animate("hidden")
@@ -288,5 +345,4 @@ existing.onTap (event, layer) ->
 		scrollExisting.scrollVertical = true
 		Utils.delay .2, ->
 			wrapper_add.animate("active")
-
 
