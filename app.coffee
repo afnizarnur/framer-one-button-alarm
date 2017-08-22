@@ -2,7 +2,12 @@
 Framer.Extras.Hints.disable()
 
 InputModule = require "input"
-timer = []
+timer = 
+	[
+		{ id:1, hours:"4", minutes:"33" },
+		{ id:2, hours:"2", minutes:"43" }
+	]
+	
 timer_count = 0
 
 # Disable right-click context menu
@@ -170,16 +175,6 @@ inputH.style =
 inputM.style =
 	textAlign: "center"
 
-# Insert to JSON Array
-if inputH.value != null && inputM.value != null && checkButton.states.current.name is "default"
-	checkButton.onTap (event, layer) ->
-		timer_count++
-		data = 
-			id: timer_count
-			hours: inputH.value
-			minutes: inputM.value
-		timer.push data
-
 # ScrollComponent for Window Alarm
 scrollExisting = new ScrollComponent
 	z: -1
@@ -251,6 +246,15 @@ button.onTap (event, layer) ->
 		closeButton.animate("hidden")
 		add_alarm.animate("active")
 		wrapper_add.stateSwitch("active")	
+		
+		# Insert to JSON Array
+		if inputH.value != "" && inputM.value != ""
+			timer_count++
+			data = 
+				id: timer_count
+				hours: inputH.value
+				minutes: inputM.value
+			timer.push data
 
 # Maximize states
 maximize.states =
@@ -270,7 +274,7 @@ maximize.onTap (event, layer) ->
 	if add_alarm.height <= 210
 		add_alarm.animate("full")
 		scrollExisting.animate("full")
-	else if wrapper_empty.states.current.name is "active"
+	else if wrapper_empty.states.current.name is "active" or wrapper_list.states.current.name is "active" 
 		add_alarm.animate("full")
 		scrollExisting.animate("full")
 	else
@@ -293,8 +297,21 @@ wrapper_empty.states =
 			time: .4
 			curve: Spring
 
-wrapper_empty.stateSwitch("hidden")
+# When timer not empty
+wrapper_list.states =			
+	active:
+		x: 0
+		animationOptions:
+			time: .5
+			curve: Bezier.ease
+	hidden:
+		x: -350
+		animationOptions:
+			time: .2
+			curve: Bezier.easeIn
 
+wrapper_empty.stateSwitch("hidden")
+wrapper_list.stateSwitch("hidden")
 wrapper_content.parent = scrollExisting.content
 
 # When user tap existing page
@@ -309,6 +326,13 @@ existing.states =
 		animationOptions:
 			time: .3
 			curve: Bezier.easeInOut
+	
+			
+for item, index in timer
+	hours = item.hours
+	minutes = item.minutes
+	
+	
 			
 existing.onTap (event, layer) ->
 	if existing.states.current.name isnt "active"
@@ -317,8 +341,17 @@ existing.onTap (event, layer) ->
 			scrollExisting.stateSwitch("full")
 			add_alarm.animate("full")
 		if timer.present()
+			wrapper_list.parent = wrapper_content
 			existing.animate("active")
-			print "Not empty timer"	
+			maximize.animate("disable")
+			addButton.animate("hidden")
+			checkButton.animate("hidden")
+			closeButton.animate("active")
+			wrapper_content.height = 420
+			scrollExisting.scrollVertical = true
+			
+			Utils.delay 0.4, ->
+				wrapper_list.animate("active")
 		else
 			wrapper_empty.parent = wrapper_content
 			existing.animate("active")
@@ -340,6 +373,7 @@ existing.onTap (event, layer) ->
 		checkButton.animate("active")
 		closeButton.animate("hidden")
 		wrapper_empty.animate("hidden")
+		wrapper_list.animate("hidden")
 		scrollExisting.scrollVertical = true
 		Utils.delay .2, ->
 			wrapper_add.animate("active")

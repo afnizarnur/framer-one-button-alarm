@@ -1,7 +1,7 @@
 {
   "orientation" : 0,
   "updateDelay" : 0.3,
-  "designModeSelected" : 0,
+  "designModeSelected" : 1,
   "cachedDeviceHeight" : 667,
   "contentScale" : 1,
   "cachedDeviceWidth" : 375,
@@ -16,17 +16,17 @@
   "selectedHand" : "iphone-hands-1",
   "showBezel" : false,
   "foldedCodeRanges" : [
-    "{102, 143}",
-    "{246, 271}",
-    "{518, 68}",
-    "{587, 1545}",
-    "{2871, 501}",
-    "{3375, 202}",
-    "{3578, 844}",
-    "{4423, 201}",
-    "{4625, 329}",
-    "{4955, 225}",
-    "{5267, 1237}"
+    "{181, 143}",
+    "{325, 271}",
+    "{597, 68}",
+    "{666, 1545}",
+    "{2212, 469}",
+    "{2682, 501}",
+    "{3186, 202}",
+    "{4425, 201}",
+    "{4627, 378}",
+    "{5006, 225}",
+    "{5232, 193}"
   ],
   "deviceScale" : "fit"
 }
