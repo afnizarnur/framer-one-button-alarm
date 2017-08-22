@@ -5,7 +5,14 @@ InputModule = require "input"
 timer = 
 	[
 		{ id:1, hours:"4", minutes:"33" },
-		{ id:2, hours:"2", minutes:"43" }
+		{ id:2, hours:"2", minutes:"43" },
+		{ id:3, hours:"2", minutes:"43" },
+		{ id:3, hours:"2", minutes:"43" },
+		{ id:3, hours:"2", minutes:"43" },
+		{ id:3, hours:"2", minutes:"43" },
+		{ id:3, hours:"2", minutes:"43" },
+		{ id:3, hours:"2", minutes:"43" }
+		
 	]
 	
 timer_count = 0
@@ -232,6 +239,7 @@ button.onTap (event, layer) ->
 		closeButton.animate("hidden")
 		maximize.animate("default")
 		existing.stateSwitch("default")
+		wrapper_list.stateSwitch("hidden")
 		wrapper_empty.stateSwitch("hidden")
 
 		if add_alarm.states.current.name is "full"
@@ -326,16 +334,18 @@ existing.states =
 		animationOptions:
 			time: .3
 			curve: Bezier.easeInOut
-		
+
 for item, index in timer
 	hours = item.hours
 	minutes = item.minutes
 	
 	alarm_item.copy().parent = wrapper_list 
-	wrapper_list.children[index].children[3].template =
+	wrapper_list.children[index].children[2].template =
 		h: hours
 		m: minutes
 	wrapper_list.children[index].y = 60 * index
+	
+wrapper_list.children[0].destroy()
 	
 existing.onTap (event, layer) ->
 	if existing.states.current.name isnt "active"
@@ -344,7 +354,7 @@ existing.onTap (event, layer) ->
 			scrollExisting.stateSwitch("full")
 			add_alarm.animate("full")
 		if timer.present()
-			wrapper_list.parent = wrapper_content
+			wrapper_list.parent = scrollExisting.content
 			existing.animate("active")
 			maximize.animate("disable")
 			addButton.animate("hidden")
