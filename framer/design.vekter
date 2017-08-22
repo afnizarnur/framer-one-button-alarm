@@ -453,7 +453,7 @@
 
                       }
                     },
-                    "name" : null,
+                    "name" : "time",
                     "shadows" : [
                       {
                         "y" : 2,

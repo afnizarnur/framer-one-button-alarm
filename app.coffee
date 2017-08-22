@@ -326,14 +326,17 @@ existing.states =
 		animationOptions:
 			time: .3
 			curve: Bezier.easeInOut
-	
-			
+		
 for item, index in timer
 	hours = item.hours
 	minutes = item.minutes
 	
+	alarm_item.copy().parent = wrapper_list 
+	wrapper_list.children[index].children[3].template =
+		h: hours
+		m: minutes
+	wrapper_list.children[index].y = 60 * index
 	
-			
 existing.onTap (event, layer) ->
 	if existing.states.current.name isnt "active"
 		wrapper_add.animate("hidden")
