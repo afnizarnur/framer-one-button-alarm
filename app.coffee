@@ -2,19 +2,7 @@
 Framer.Extras.Hints.disable()
 
 InputModule = require "input"
-timer = 
-	[
-		{ id:1, hours:"4", minutes:"33" },
-		{ id:2, hours:"2", minutes:"43" },
-		{ id:3, hours:"2", minutes:"43" },
-		{ id:3, hours:"2", minutes:"43" },
-		{ id:3, hours:"2", minutes:"43" },
-		{ id:3, hours:"2", minutes:"43" },
-		{ id:3, hours:"2", minutes:"43" },
-		{ id:3, hours:"2", minutes:"43" }
-		
-	]
-	
+timer = []
 timer_count = 0
 
 # Disable right-click context menu
@@ -335,6 +323,7 @@ existing.states =
 			time: .3
 			curve: Bezier.easeInOut
 
+# Loop List of Alarm
 for item, index in timer
 	hours = item.hours
 	minutes = item.minutes
