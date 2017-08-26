@@ -258,6 +258,11 @@ button.onTap (event, layer) ->
 			timer.push data
 			inputH.value = ""
 			inputM.value = ""
+# 			
+# 			if timer.push
+# 				checkButton.animate("saved")
+# 				Utils.delay 1, ->
+# 					checkButton.animate("active")
 
 # Maximize states
 maximize.states =
