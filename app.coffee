@@ -89,6 +89,11 @@ checkButton.states =
 		animationOptions:
 			time: 0.4
 			curve: Spring
+	saved:
+		scale: 2
+		animationOptions:
+			time: 0.5
+			curve: Spring
 
 closeButton.states =
 	active:
@@ -251,6 +256,8 @@ button.onTap (event, layer) ->
 				hours: inputH.value
 				minutes: inputM.value
 			timer.push data
+			inputH.value = ""
+			inputM.value = ""
 
 # Maximize states
 maximize.states =
@@ -322,21 +329,22 @@ existing.states =
 		animationOptions:
 			time: .3
 			curve: Bezier.easeInOut
-
-# Loop List of Alarm
-for item, index in timer
-	hours = item.hours
-	minutes = item.minutes
-	
-	alarm_item.copy().parent = wrapper_list 
-	wrapper_list.children[index].children[2].template =
-		h: hours
-		m: minutes
-	wrapper_list.children[index].y = 60 * index
-	
-wrapper_list.children[0].destroy()
 	
 existing.onTap (event, layer) ->
+	# Loop List of Alarm
+	for item, index in timer
+		hours = item.hours
+		minutes = item.minutes
+		alarm_item.children[2].template =
+			h: hours[index]
+			m: minutes[index]
+			
+# 		alarm_item.copy().parent = wrapper_list 
+# 		wrapper_list.children[index].children[2].template =
+# 			h: hours
+# 			m: minutes
+# 		wrapper_list.children[index].y = 60 * index
+	
 	if existing.states.current.name isnt "active"
 		wrapper_add.animate("hidden")
 		Utils.delay .2, ->
